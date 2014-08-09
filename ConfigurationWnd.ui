@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConfigurationWnd</class>
+ <widget class="QWidget" name="ConfigurationWnd">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>716</width>
+    <height>478</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ConfigurationWnd</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>40</y>
+     <width>571</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Lines</string>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTableWidget" name="tbl_Lines">
+      <property name="columnCount">
+       <number>5</number>
+      </property>
+      <column>
+       <property name="text">
+        <string>New Column</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>X1</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Y1</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>X2</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Y2</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>tbl_Lines</sender>
+   <signal>itemChanged(QTableWidgetItem*)</signal>
+   <receiver>ConfigurationWnd</receiver>
+   <slot>OnLineTableItemChanged(QTableWidgetItem*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>264</x>
+     <y>110</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>758</x>
+     <y>147</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>OnLineTableItemChanged(QTableWidgetItem*)</slot>
+ </slots>
+</ui>
