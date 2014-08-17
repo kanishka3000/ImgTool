@@ -1,15 +1,16 @@
 <RCC>
-  <qresource prefix="/ImageTool">
-    <file>Resources/zin.png</file>
-    <file>Resources/zout.png</file>
-    <file>Resources/width.png</file>
-    <file>Resources/Penguins.jpg</file>
-    <file>Resources/line.png</file>
-    <file>Resources/rectangle.png</file>
-    <file>Resources/circle.png</file>
-    <file>Resources/pallet.png</file>
-    <file>Resources/cursor_hand.png</file>
-    <file>Resources/edit.png</file>
-    <file>Resources/Eraser.png</file>
-  </qresource>
+    <qresource prefix="/ImageTool">
+        <file>Resources/zin.png</file>
+        <file>Resources/zout.png</file>
+        <file>Resources/width.png</file>
+        <file>Resources/Penguins.jpg</file>
+        <file>Resources/line.png</file>
+        <file>Resources/rectangle.png</file>
+        <file>Resources/circle.png</file>
+        <file>Resources/pallet.png</file>
+        <file>Resources/cursor_hand.png</file>
+        <file>Resources/edit.png</file>
+        <file>Resources/Eraser.png</file>
+        <file>C:/Users/Public/Pictures/Sample Pictures/Penguins_1.bmp</file>
+    </qresource>
 </RCC>

@@ -21,7 +21,7 @@
 #include <QButtonGroup>
 #include "ui_GraphiItemCtrl.h"
 class QColorDialog;
-class GraphiItemCtrl :public QGraphicsView, public Ui::GraphiItemCtrl
+class GraphiItemCtrl :public QWidget, public Ui::GraphiItemCtrl
 {
 	Q_OBJECT
 
@@ -33,8 +33,9 @@ public:
 	virtual void paintEvent ( QPaintEvent * event );
 	virtual void OnMouseClickEvent(QPointF oPoint);
 	virtual void OnMouseReleaseEvent(QPointF oPoint);
+	virtual void OnMouseMoveEvent(QPointF oPoint);
 	virtual void OnGraphicsScale(bool bZoomIn);
-
+	void UpdateCoordinates(QString sMsg){lbl_Coordinates->setText(sMsg);};
 	void OnRemoveEvent();
 	void OnDrawEvent();
 

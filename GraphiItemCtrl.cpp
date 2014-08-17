@@ -4,19 +4,21 @@
 #include <QString>
 #include <ConfigurationWnd.h>
 #include <QColorDialog>
+#include <GraphicImageView.h>
 GraphiItemCtrl::GraphiItemCtrl(QWidget *parent)
 	:QWidget(parent)
 {
 	setupUi(this);
+	
 	i_LastItemKey = -1;
 	i_ActivityMode = ACTIVTITY_MODE_SELECT;
-
+	((GraphicImageView*)p_GraphicView)->SetParent(this);
 	QPixmap oImage(":/ImageTool/Resources/Penguins.jpg");
 	o_OrigianlRect = oImage.rect();
-	setSceneRect(oImage.rect());
+	p_GraphicView->setSceneRect(oImage.rect());
 	
 	p_Image = new GraphicImage(oImage,this);
-	setScene(&o_ItemScene);
+	p_GraphicView->setScene(&o_ItemScene);
 	
 	o_ItemScene.addItem(p_Image);
 
@@ -46,8 +48,8 @@ GraphiItemCtrl::GraphiItemCtrl(QWidget *parent)
 	o_CurrentPen.setWidth(i_CurrentWidth);
 	p_ColorDialog = new QColorDialog(this);
 	
-	setInteractive(false);
-	setDragMode(QGraphicsView::ScrollHandDrag);
+	p_GraphicView->setInteractive(false);
+	p_GraphicView->setDragMode(QGraphicsView::ScrollHandDrag);
 
 	frm_ClrSelection->setEnabled(false);
 	frm_ItemSelection->setEnabled(false);
@@ -101,6 +103,7 @@ void GraphiItemCtrl::OnMouseClickEvent(QPointF oPoint )
 void GraphiItemCtrl::OnMouseReleaseEvent( QPointF oPoint  )
 {
 	o_PointB =  oPoint;
+
 	setCursor(Qt::ArrowCursor);
 	if(o_MainActivity.checkedButton() == rdo_Draw)
 	{
@@ -243,11 +246,11 @@ void GraphiItemCtrl::OnGraphicsScale( bool bZoomIn )
 
 	if(bZoomIn)
 	{
-		scale(dScaleFactor,dScaleFactor);
+		p_GraphicView->scale(dScaleFactor,dScaleFactor);
 	}
 	else
 	{
-		scale(1.0/dScaleFactor,1.0/dScaleFactor);
+		p_GraphicView->scale(1.0/dScaleFactor,1.0/dScaleFactor);
 		QRectF imageRect = rect();
 		//if((imageRect.width() < o_OrigianlRect.width() ) || (imageRect.height() < o_OrigianlRect.height()) )
 		//{
@@ -263,18 +266,19 @@ void GraphiItemCtrl::OnButtonSelected( QAbstractButton * button )
 	{
 		//p_Image->setFlags(QGraphicsItem::ItemIsMovable);
 		i_ActivityMode = ACTIVTITY_MODE_SELECT;
-		setInteractive(false);
-		setDragMode(QGraphicsView::ScrollHandDrag);
+		p_GraphicView->setInteractive(false);
+		p_GraphicView->setDragMode(QGraphicsView::ScrollHandDrag);
 		frm_ClrSelection->setEnabled(false);
 		frm_ItemSelection->setEnabled(false);
 		frm_SizeSelection->setEnabled(false);
+		lbl_Coordinates->setText("");
 		//o_Group.setFlags(QGraphicsItem::ItemIsFocusable|QGraphicsItem::ItemIsSelectable|QGraphicsItem::ItemIsMovable);
 	}
 	else if (button == rdo_Draw)
 	{
 		i_ActivityMode = ACTIVTITY_MODE_DRAW;
-		setInteractive(true);
-		setDragMode(QGraphicsView::NoDrag);
+		p_GraphicView->setInteractive(true);
+		p_GraphicView->setDragMode(QGraphicsView::NoDrag);
 		//p_Image->setFlags(0);
 		frm_ClrSelection->setEnabled(true);
 		frm_ItemSelection->setEnabled(true);
@@ -284,8 +288,8 @@ void GraphiItemCtrl::OnButtonSelected( QAbstractButton * button )
 	else if (button == rdo_Erase)
 	{
 		i_ActivityMode = ACTIVTITY_MODE_DRAW;
-		setInteractive(true);
-		setDragMode(QGraphicsView::NoDrag);
+		p_GraphicView->setInteractive(true);
+		p_GraphicView->setDragMode(QGraphicsView::NoDrag);
 		frm_ClrSelection->setEnabled(false);
 		frm_ItemSelection->setEnabled(false);
 		frm_SizeSelection->setEnabled(false);
@@ -343,6 +347,14 @@ void GraphiItemCtrl::OnZoomChanged( QAbstractButton * button )
 		OnGraphicsScale(false);
 	}
 }
+
+void GraphiItemCtrl::OnMouseMoveEvent( QPointF oPoint )
+{
+	QString sValue;
+	sValue.sprintf("%f x %f", oPoint.x(),oPoint.y());
+	lbl_Coordinates->setText(sValue);
+}
+
 
 
 
