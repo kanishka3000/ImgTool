@@ -11,9 +11,13 @@ public:
 	GraphicImageView(QWidget *parent);
 	~GraphicImageView();
 
-	virtual void	mousePressEvent ( QMouseEvent * pEvent );
-	virtual void	mouseReleaseEvent ( QMouseEvent * pEvent );
+	/*virtual void	mousePressEvent ( QMouseEvent * pEvent );
+	virtual void	mouseReleaseEvent ( QMouseEvent * pEvent );*/
+
+	virtual void	contextMenuEvent ( QGraphicsSceneContextMenuEvent * event );
 	void SetParent(GraphiItemCtrl* pParent){p_Parent = pParent;};
+	public slots:
+		void OnClick();
 private:
 	GraphiItemCtrl* p_Parent;
 };

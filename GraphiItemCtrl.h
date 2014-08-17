@@ -11,6 +11,7 @@
 
 #define ACTIVTITY_MODE_DRAW		1
 #define ACTIVTITY_MODE_SELECT	2
+#define ACTIVITY_MODE_POINT		3
 
 #define CUSTDATA_KEY	1
 #include <QWidget>
@@ -66,6 +67,7 @@ private:
 	QColorDialog* p_ColorDialog;
 	int i_ActivityMode;
 	QRectF o_OrigianlRect;
+	qreal d_Scale;
 signals:
 	//Notifies all lines at an initiation
 	void NotifyAllLines(QMap<int,QLineF> mapLines);//Optimization note: if large number should prevent coping
@@ -91,6 +93,7 @@ public slots:
 	void OpenColorPallet();
 	void ColorSelected(QColor eColor);
 	void OnLineWidth(int iWidth);
+	void OnZoomValueChanged(double dScale);
 };
 
 #endif // GRAPHIITEMCTRL_H

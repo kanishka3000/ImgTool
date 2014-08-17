@@ -12,5 +12,6 @@
         <file>Resources/edit.png</file>
         <file>Resources/Eraser.png</file>
         <file>C:/Users/Public/Pictures/Sample Pictures/Penguins_1.bmp</file>
+        <file>Resources/Arrow.png</file>
     </qresource>
 </RCC>

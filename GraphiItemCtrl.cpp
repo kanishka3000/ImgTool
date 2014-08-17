@@ -5,11 +5,12 @@
 #include <ConfigurationWnd.h>
 #include <QColorDialog>
 #include <GraphicImageView.h>
+#include <QShortcut>
 GraphiItemCtrl::GraphiItemCtrl(QWidget *parent)
 	:QWidget(parent)
 {
 	setupUi(this);
-	
+	d_Scale = 1;
 	i_LastItemKey = -1;
 	i_ActivityMode = ACTIVTITY_MODE_SELECT;
 	((GraphicImageView*)p_GraphicView)->SetParent(this);
@@ -25,6 +26,7 @@ GraphiItemCtrl::GraphiItemCtrl(QWidget *parent)
 	o_MainActivity.addButton(rdo_Draw);
 	o_MainActivity.addButton(rdo_Erase);
 	o_MainActivity.addButton(rdo_Select);
+	o_MainActivity.addButton(rdo_Point);
 
 	o_DrawType.addButton(btn_Line);
 	o_DrawType.addButton(btn_Rectangle);
@@ -63,6 +65,8 @@ GraphiItemCtrl::GraphiItemCtrl(QWidget *parent)
 		this, SLOT(ColorSelected( QColor  )));
 	connect(&o_Zooming, SIGNAL(buttonClicked ( QAbstractButton *  )), 
 		this, SLOT(OnZoomChanged(QAbstractButton * )));
+
+	
 	
 }
 
@@ -92,6 +96,9 @@ void GraphiItemCtrl::paintEvent( QPaintEvent * event )
 
 void GraphiItemCtrl::OnMouseClickEvent(QPointF oPoint )
 {
+	if(i_ActivityMode == ACTIVITY_MODE_POINT)
+		return;
+
 	o_PointA = oPoint;
 	if(i_ActivityMode == ACTIVTITY_MODE_DRAW)
 	{
@@ -102,6 +109,10 @@ void GraphiItemCtrl::OnMouseClickEvent(QPointF oPoint )
 
 void GraphiItemCtrl::OnMouseReleaseEvent( QPointF oPoint  )
 {
+
+	if(i_ActivityMode == ACTIVITY_MODE_POINT)
+		return;
+
 	o_PointB =  oPoint;
 
 	setCursor(Qt::ArrowCursor);
@@ -242,21 +253,29 @@ void GraphiItemCtrl::OnLineChanged( int iKey, QLineF oLine )
 void GraphiItemCtrl::OnGraphicsScale( bool bZoomIn )
 {
 
-	 double dScaleFactor = 1.15;
-
+	 double dScaleFactor = 1.1;
+	
 	if(bZoomIn)
 	{
 		p_GraphicView->scale(dScaleFactor,dScaleFactor);
+		 
+		d_Scale += 0.1;
+		
 	}
 	else
 	{
 		p_GraphicView->scale(1.0/dScaleFactor,1.0/dScaleFactor);
 		QRectF imageRect = rect();
+		d_Scale -= 0.1;
 		//if((imageRect.width() < o_OrigianlRect.width() ) || (imageRect.height() < o_OrigianlRect.height()) )
 		//{
 		//	setSceneRect(o_OrigianlRect);
 		//}
 	}
+	spin_Zoom->setValue(d_Scale);
+	
+
+	
 
 }
 
@@ -294,6 +313,17 @@ void GraphiItemCtrl::OnButtonSelected( QAbstractButton * button )
 		frm_ItemSelection->setEnabled(false);
 		frm_SizeSelection->setEnabled(false);
 	}
+	else if (button == rdo_Point)
+	{
+		i_ActivityMode = ACTIVITY_MODE_POINT;
+		p_GraphicView->setInteractive(true);
+		p_GraphicView->setDragMode(QGraphicsView::NoDrag);
+		frm_ClrSelection->setEnabled(false);
+		frm_ItemSelection->setEnabled(false);
+		frm_SizeSelection->setEnabled(false);
+
+	}
+	setCursor(Qt::ArrowCursor);
 }
 
 void GraphiItemCtrl::OnDrawTypeChanged( QAbstractButton * button )
@@ -353,6 +383,12 @@ void GraphiItemCtrl::OnMouseMoveEvent( QPointF oPoint )
 	QString sValue;
 	sValue.sprintf("%f x %f", oPoint.x(),oPoint.y());
 	lbl_Coordinates->setText(sValue);
+}
+
+void GraphiItemCtrl::OnZoomValueChanged( double dScale)
+{
+	QTransform oTransform = QTransform::fromScale(dScale, dScale);
+	p_GraphicView->setTransform(oTransform);
 }
 
 
