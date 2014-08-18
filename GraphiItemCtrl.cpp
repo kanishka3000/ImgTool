@@ -268,10 +268,7 @@ void GraphiItemCtrl::OnGraphicsScale( bool bZoomIn )
 		p_GraphicView->scale(1.0/dScaleFactor,1.0/dScaleFactor);
 		QRectF imageRect = rect();
 		d_Scale -= 0.1;
-		//if((imageRect.width() < o_OrigianlRect.width() ) || (imageRect.height() < o_OrigianlRect.height()) )
-		//{
-		//	setSceneRect(o_OrigianlRect);
-		//}
+
 	}
 	spin_Zoom->setValue(d_Scale);
 	
