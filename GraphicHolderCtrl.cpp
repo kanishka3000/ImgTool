@@ -7,15 +7,6 @@ GraphicHolderCtrl::GraphicHolderCtrl(QWidget *parent)
 	setupUi(this);
 
 
-	QHBoxLayout* pMainLayout = new QHBoxLayout(this);
-	setLayout(pMainLayout);
-
-	GraphiItemCtrl* pItemCtrl = new GraphiItemCtrl(this);
-	pMainLayout->addWidget(pItemCtrl);
-
-	GraphiItemCtrl* pItemCtrlw = new GraphiItemCtrl(this);
-	pMainLayout->addWidget(pItemCtrlw);
-
 
 }
 

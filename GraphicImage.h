@@ -13,17 +13,8 @@ class GraphicImage :
 public:
 	GraphicImage(QPixmap oImage,GraphiItemCtrl* pParent);
 	virtual void	mousePressEvent ( QGraphicsSceneMouseEvent * pEvent );
-
 	virtual void	mouseReleaseEvent ( QGraphicsSceneMouseEvent * pEvent );
-	virtual void	wheelEvent ( QGraphicsSceneWheelEvent * pEvent );
-
-	//virtual void	mouseMoveEvent(QGraphicsSceneMouseEvent * event);
-
-	virtual void	hoverMoveEvent(QGraphicsSceneHoverEvent * event);
-	virtual void	hoverLeaveEvent(QGraphicsSceneHoverEvent * event);
-
-	
-
+	virtual void	hoverMoveEvent(QGraphicsSceneHoverEvent * event);	
 	virtual ~GraphicImage(void);
 
 private:

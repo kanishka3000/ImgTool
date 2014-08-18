@@ -1,11 +1,12 @@
 #include "stdafx.h"
-#include "ImageTool.h"
+
+#include <GraphicHolderCtrl.h>
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	ImageTool w;
-	w.show();
+	GraphicHolderCtrl oHolder;
+	oHolder.show();
 	return a.exec();
 }

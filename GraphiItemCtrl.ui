@@ -618,7 +618,7 @@
     </widget>
    </item>
    <item>
-    <widget class="GraphicImageView" name="p_GraphicView">
+    <widget class="QGraphicsView" name="p_GraphicView">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -692,13 +692,6 @@
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>GraphicImageView</class>
-   <extends>QGraphicsView</extends>
-   <header location="global">GraphicImageView.h</header>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="ImageTool.qrc"/>
  </resources>

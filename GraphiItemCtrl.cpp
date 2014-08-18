@@ -4,7 +4,6 @@
 #include <QString>
 #include <ConfigurationWnd.h>
 #include <QColorDialog>
-#include <GraphicImageView.h>
 #include <QShortcut>
 GraphiItemCtrl::GraphiItemCtrl(QWidget *parent)
 	:QWidget(parent)
@@ -13,10 +12,12 @@ GraphiItemCtrl::GraphiItemCtrl(QWidget *parent)
 	d_Scale = 1;
 	i_LastItemKey = -1;
 	i_ActivityMode = ACTIVTITY_MODE_SELECT;
-	((GraphicImageView*)p_GraphicView)->SetParent(this);
+	
 	QPixmap oImage(":/ImageTool/Resources/Penguins.jpg");
 	o_OrigianlRect = oImage.rect();
 	p_GraphicView->setSceneRect(oImage.rect());
+	p_GraphicView->setMaximumHeight(oImage.height());
+	p_GraphicView->setMaximumWidth(oImage.width());
 	
 	p_Image = new GraphicImage(oImage,this);
 	p_GraphicView->setScene(&o_ItemScene);
