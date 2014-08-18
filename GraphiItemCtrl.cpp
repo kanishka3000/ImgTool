@@ -150,7 +150,7 @@ void GraphiItemCtrl::OnDrawEvent()
 			map_Lines.insert(iKey,oLine);
 			map_LineItems.insert(iKey, pLine);
 			pLine->setData(CUSTDATA_KEY,iKey);
-			//o_Group.addToGroup(pLine);
+			
 			emit NotifyLineAdded(iKey,oLine);
 			break;
 		}
@@ -164,7 +164,7 @@ void GraphiItemCtrl::OnDrawEvent()
 			QRectF oRect = pRect->rect();
 			map_Rects.insert(iKey, oRect);
 			pRect->setData(CUSTDATA_KEY,iKey);
-			//o_Group.addToGroup(pRect);
+			
 			emit NotifyRectAdded(iKey,oRect);
 		
 			break;
@@ -175,12 +175,12 @@ void GraphiItemCtrl::OnDrawEvent()
 			double dHeight = o_PointB.y() - o_PointA.y();
 			QGraphicsEllipseItem* pElipse =	o_ItemScene.addEllipse(o_PointA.x(),o_PointA.y(),
 				dWidth ,dHeight,o_CurrentPen);
-			//pElipse->setFlags(QGraphicsItem::ItemIsFocusable|QGraphicsItem::ItemIsSelectable|QGraphicsItem::ItemIsMovable);
+			
 			int iKey = GetNextItemKey();
 			pElipse->setData(CUSTDATA_KEY, iKey);
 			QRectF oRect = pElipse->rect();
 			map_Elipses.insert(iKey,oRect);
-			//o_Group.addToGroup(pElipse);
+			
 			emit NotifyElipseAdded(iKey,oRect);
 			break;
 		}
@@ -281,7 +281,7 @@ void GraphiItemCtrl::OnButtonSelected( QAbstractButton * button )
 {
 	if(button == rdo_Select)
 	{
-		//p_Image->setFlags(QGraphicsItem::ItemIsMovable);
+		
 		i_ActivityMode = ACTIVTITY_MODE_SELECT;
 		p_GraphicView->setInteractive(false);
 		p_GraphicView->setDragMode(QGraphicsView::ScrollHandDrag);
@@ -289,18 +289,18 @@ void GraphiItemCtrl::OnButtonSelected( QAbstractButton * button )
 		frm_ItemSelection->setEnabled(false);
 		frm_SizeSelection->setEnabled(false);
 		lbl_Coordinates->setText("");
-		//o_Group.setFlags(QGraphicsItem::ItemIsFocusable|QGraphicsItem::ItemIsSelectable|QGraphicsItem::ItemIsMovable);
+		
 	}
 	else if (button == rdo_Draw)
 	{
 		i_ActivityMode = ACTIVTITY_MODE_DRAW;
 		p_GraphicView->setInteractive(true);
 		p_GraphicView->setDragMode(QGraphicsView::NoDrag);
-		//p_Image->setFlags(0);
+		
 		frm_ClrSelection->setEnabled(true);
 		frm_ItemSelection->setEnabled(true);
 		frm_SizeSelection->setEnabled(true);
-		//o_Group.setFlags(0);
+		
 	}
 	else if (button == rdo_Erase)
 	{

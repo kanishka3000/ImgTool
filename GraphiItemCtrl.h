@@ -53,6 +53,7 @@ public:
 	QButtonGroup o_MainActivity;
 	QButtonGroup o_DrawType;
 	QButtonGroup o_Zooming;
+
 private:
 	QMap<int,QLineF> map_Lines;
 	QMap<int,QRectF> map_Rects;
